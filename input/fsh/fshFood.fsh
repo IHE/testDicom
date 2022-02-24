@@ -1,55 +1,63 @@
-Instance:   ex-List
-InstanceOf: List
-Title: "Example List with contained Patient"
-Description:      "List Resource with contained resources that will not render right and throw IG build errors."
+Alias: DCM = http://dicom.nema.org/resources/ontology/DCM
+
+ValueSet: JustModalitiesVS
+Title: "all the DICOM modalities ValueSet"
+Description: "ValueSet of the Document Sharing Endpint types allowed"
+//Note that when MCSDEndpointTypes has more than Document Sharing in it, this will need to be more explicit. 
+* codes from valueset https://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html
+
+ValueSet: FewModalitiesVS
+Title: "Just some modalities"
+Description: "ValueSet of some modalities allowed"
+* DCM#AR
+* DCM#BI
+* DCM#BMD
+
+
+
+
+Profile:        TestImageVs
+Parent:         ImagingStudy
+Id:             JohnMoehrke.testDicom.testImage.vs
+Title:          "test image profile using all valueSets"
+Description:    "A profile on ImagingStudy to show off some valueSets"
+* modality from JustModalitiesVS (required)
+* series.modality from FewModalitiesVS (required)
+
+Profile:        TestImageBind
+Parent:         ImagingStudy
+Id:             JohnMoehrke.testDicom.testImage.bind
+Title:          "test image profile binding to dicom valueset"
+Description:    "A profile on ImagingStudy to show off some valueSets"
+* modality from https://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html (required)
+* series.modality from FewModalitiesVS (required)
+
+Instance:   ex-imagingstudy
+InstanceOf: TestImageVs
+Title: "Example ImagingStudy"
+Description:      "simple example."
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * subject = Reference(Patient/ex-patient)
-* contained[+] = ex-patient
-* identifier[0].system = "urn:ietf:rfc:3986"
-* identifier[0].value = "urn:oid:1.2.129.6.58.92.88337.4"
-* identifier[0].use = #official
-* identifier[1].system = "http://example.org/documents"
-* identifier[1].value = "23425234-23470"
-* identifier[1].use = #usual
-* status = #current
-* mode = #working
-* title = "Example List showing contained issue"
-//* code = MHDlistTypes#submissionset
-* date = 2004-12-25T23:50:50-05:00
-//* entry[0].item = Reference(DocumentReference/ex-documentreference)
-//* contained[+] = ex-documentreference
-//* entry[1].item = Reference(DocumentReference/ex-documentreference2)
-//* contained[+] = ex-documentreference2
-//* source = Reference(Practitioner/in-sender)
-//* contained[+] = in-sender
+* status = #available
+* modality = DCM#AR
+* series.modality = DCM#BI
+* series.uid = "1.2.3.4.5"
 
-
-
-Instance:   ex-Observation
-InstanceOf: Observation
-Title: "Example using observation of with contained Patient"
-Description:      "holding invalid values"
-//* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
-* status = #final
-* category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
-* code.coding = http://loinc.org#72514-3 "Pain severity - 0-10 verbal numeric rating [Score] - Reported"
-* code.coding[1] = http://snomed.info/sct#225908003 "Pain Score"
+Instance:   ex-imagingstudy-withBadCode
+InstanceOf: TestImageVs
+Title: "Example ImagingStudy with a bad DICOM code"
+Description:      "simple example with a bad DICOM code."
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * subject = Reference(Patient/ex-patient)
-* contained[+] = ex-patient
-* effectiveDateTime = 2004-12-25T23:50:50-05:00
-* valueQuantity.value = 11
+* status = #available
+// note DCM#PRINT is valid in DCM, but is not in the modality valueset
+* modality = DCM#PRINT
+* series.modality = DCM#BI
+* series.uid = "1.2.3.4.5"
 
 
-
-Instance: in-sender
-InstanceOf: Practitioner
-Title: "Dummy inline Practitioner example sender"
-Description: "Dummy inline Practitioner example for sender. No actual use of this resource other than an example sender"
-//Usage: #example
-Usage: #inline
-* telecom.system = #email
-* telecom.value = "JohnMoehrke@example.com"
 
 
 
@@ -58,9 +66,9 @@ Instance:   ex-patient
 InstanceOf: Patient
 Title:      "Dummy Patient example"
 Description: "Dummy patient example for completeness sake. No actual use of this resource other than an example target"
-Usage: #inline
-//Usage: #example
-//* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+//Usage: #inline
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * name[+].use = #usual
 * name[=].family = "Schmidt"
 * name[=].given = "John"
@@ -84,28 +92,4 @@ Usage: #inline
 * birthDate = "1923-07-25"
 * address.state = "WI"
 * address.country = "USA"
-
-Instance: ex-documentreference
-InstanceOf: DocumentReference
-Title: "Dummy DocumentReference example"
-Description: "Dummy DocumentReference example for completeness sake. No actual use of this resource other than an example target"
-Usage: #inline
-//Usage: #example
-//* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
-* status = #current
-* content.attachment.title = "Hello World"
-* content.attachment.contentType = #text/plain
-
-Instance: ex-documentreference2
-InstanceOf: DocumentReference
-Title: "Dummy DocumentReference 2 example"
-Description: "Dummy DocumentReference 2 example for completeness sake. No actual use of this resource other than an example target"
-Usage: #inline
-//Usage: #example
-//* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
-* status = #current
-* content.attachment.title = "Hello World"
-* content.attachment.contentType = #text/plain
-
-
 
