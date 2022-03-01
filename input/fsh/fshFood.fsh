@@ -4,7 +4,7 @@ ValueSet: JustModalitiesVS
 Title: "all the DICOM modalities ValueSet"
 Description: "ValueSet of the Document Sharing Endpint types allowed"
 //Note that when MCSDEndpointTypes has more than Document Sharing in it, this will need to be more explicit. 
-* codes from valueset https://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html
+* codes from valueset http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html
 
 ValueSet: FewModalitiesVS
 Title: "Just some modalities"
@@ -29,7 +29,7 @@ Parent:         ImagingStudy
 Id:             JohnMoehrke.testDicom.testImage.bind
 Title:          "test image profile binding to dicom valueset"
 Description:    "A profile on ImagingStudy to show off some valueSets"
-* modality from https://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html (required)
+* modality from http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html (required)
 * series.modality from FewModalitiesVS (required)
 
 Instance:   ex-imagingstudy
