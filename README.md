@@ -7,3 +7,4 @@ ci-build - http://build.fhir.org/ig/JohnMoehrke/testDicom/branches/master/index.
 
 chat stream https://chat.fhir.org/#narrow/stream/179252-IG-creation/topic/fhir.2Edicom.20has.20no.20ImplementationGuide.20resource
 
+.
