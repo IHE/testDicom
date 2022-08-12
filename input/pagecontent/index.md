@@ -24,7 +24,7 @@ Note this IG is depending on the fhir.dicom IG so as to have access to DICOM def
 
 
 
-## Builder or Validator bug
+## Grahame says these are okay
 * profile [binding the .modality to the DICOM defined valueSet](StructureDefinition-JohnMoehrke.testDicom.testImage.bind.html)
   * **why can't this show a valueSet, where as it is just a link to DICOM**
 * example [using valid code, but with profile using valueSets](ImagingStudy-ex-imagingstudyVs.html)
