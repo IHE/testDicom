@@ -3,11 +3,13 @@ Alias: DCM = http://dicom.nema.org/resources/ontology/DCM
 ValueSet: JustModalitiesVS
 Title: "all the DICOM modalities ValueSet"
 Description: "ValueSet of all the DICOM modalities in CID-29"
+* ^experimental = false
 * codes from valueset http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html
 
 ValueSet: FewModalitiesVS
 Title: "Just some modalities"
 Description: "ValueSet of some modalities explicitly listed"
+* ^experimental = false
 * DCM#AR
 * DCM#BI
 * DCM#BMD

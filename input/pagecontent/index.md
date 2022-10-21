@@ -32,3 +32,20 @@ Note this IG is depending on the fhir.dicom IG so as to have access to DICOM def
     * note that the valueSet does expand now
   * The Coding provided (http://dicom.nema.org/resources/ontology/DCM#AR) is in the expansion value set http://johnmoehrke.github.io/testDicom/ValueSet/JustModalitiesVS, and a code is required from this value set. (error message = 	The Coding provided (http://dicom.nema.org/resources/ontology/DCM#AR) is not in the value set http://johnmoehrke.github.io/testDicom/ValueSet/JustModalitiesVS, and a code is required from this value set....)
 
+### IG builder analysis
+
+#### Cross Version Analysis
+
+{% include cross-version-analysis.xhtml %}
+
+#### Dependency Table
+
+{% include dependency-table.xhtml %}
+
+#### Globals Table
+
+{% include globals-table.xhtml %}
+
+#### IP Statements
+
+{% include ip-statements.xhtml %}
