@@ -14,12 +14,35 @@ Description: "ValueSet of some modalities explicitly listed"
 * DCM#BI
 * DCM#BMD
 
+Extension: SopOid
+Id: testDicom.SopOid
+Title: "a SOP in OID form"
+Description: "similar"
+* ^context[+].type = #element
+* ^context[=].expression = "ImagingStudy"
+* value[x] only oid
+* valueOid 1..1
+
 
 Profile: ImagingStudyTrivial
 Parent: ImagingStudy
 Id: JohnMoehrke.testDicom.testImage.trivial 
 Description: "A profile on ImagingStudy that is trivial to distinguish issues outside the scope of this IG"
 * status = #available
+* extension contains SopOid named sop 0..1
+
+Instance: SsopOid
+InstanceOf: SearchParameter
+Title: "Search on oid sop"
+Usage: #definition
+* status = #active
+* name = "SsopOid"
+* description = "Search on oid sop"
+* code = #designationType
+* base = #ImagingStudy
+* url = "http://johnmoehrke.github.io/testDicom/SearchParameter/SsopOid"
+* expression = "(extension('http://johnmoehrke.github.io/testDicom/StructureDefinition/testDicom.SopOid').value as oid)"
+* type = #uri
 
 Instance:   ex-imagingstudyTrivial
 InstanceOf: ImagingStudyTrivial
@@ -29,6 +52,7 @@ Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * subject = Reference(Patient/ex-patient)
 * status = #available
+* extension[sop].valueOid = "urn:oid:1.2.840.10008.5.1.4.1.1.2"
 
 
 
