@@ -10,3 +10,4 @@ chat stream https://chat.fhir.org/#narrow/stream/179252-IG-creation/topic/fhir.2
 ## Search on OID
 
 Added an extension of type oid, and a search parameter to search that oid. IG publisher does not appear to complain about this (while fhir core fails - https://github.com/HL7/fhir/pull/3021)
+
