@@ -1,4 +1,5 @@
 Alias: DCM = http://dicom.nema.org/resources/ontology/DCM
+Alias: DCMUID = http://dicom.nema.org/resources/ontology/DCMUID
 
 ValueSet: JustModalitiesVS
 Title: "all the DICOM modalities ValueSet"
@@ -13,6 +14,7 @@ Description: "ValueSet of some modalities explicitly listed"
 * DCM#AR
 * DCM#BI
 * DCM#BMD
+* DCM#CT
 
 Extension: SopOid
 Id: testDicom.SopOid
@@ -53,6 +55,10 @@ Usage: #example
 * subject = Reference(Patient/ex-patient)
 * status = #available
 * extension[sop].valueOid = "urn:oid:1.2.840.10008.5.1.4.1.1.2"
+* series.uid = "1.3.6.1.4.1.32473"
+* series.modality = DCM#CT
+* series.instance.uid = "1.3.6.1.4.1.32473.5"
+* series.instance.sopClass = DCMUID#1.2.840.10008.5.1.4.1.1.2 "CT Image Storage"
 
 
 
@@ -76,7 +82,7 @@ Usage: #example
 * status = #available
 * modality = DCM#AR
 * series.modality = DCM#BI
-* series.uid = "1.2.3.4.5"
+* series.uid = "1.3.6.1.4.1.32473.5"
 
 
 Profile:        TestImageBind
@@ -100,7 +106,7 @@ Usage: #example
 * status = #available
 * modality = DCM#AR
 * series.modality = DCM#BI
-* series.uid = "1.2.3.4.5"
+* series.uid = "1.3.6.1.4.1.32473.5"
 
 
 Instance:   ex-imagingstudy-withBadCode
@@ -114,7 +120,7 @@ Usage: #example
 // note DCM#PRINT is valid in DCM, but is not in the modality valueset
 * modality = DCM#PRINT
 * series.modality = DCM#BI
-* series.uid = "1.2.3.4.5"
+* series.uid = "1.3.6.1.4.1.32473.5"
 
 
 

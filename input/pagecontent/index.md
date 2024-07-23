@@ -22,6 +22,9 @@ Note this IG is depending on the fhir.dicom IG so as to have access to DICOM def
 * profile [using dicom valueSets](StructureDefinition-JohnMoehrke.testDicom.testImage.bind.html)
 
 
+## DICOM recognized URI for SOP Class
+
+Note that `http://dicom.nema.org/resources/ontology/DCMUID` should be used in FHIR R4 on sopClass as the .system value when using a DICOM recognized SOP Class UID.
 
 
 ## Grahame says these are okay
