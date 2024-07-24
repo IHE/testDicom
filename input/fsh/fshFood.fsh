@@ -1,4 +1,4 @@
-Alias: DCM = http://dicom.nema.org/resources/ontology/DCM
+Alias: DCM = http://dicom.nema.org/resources/ontology/DCM|01
 Alias: DCMUID = http://dicom.nema.org/resources/ontology/DCMUID
 
 ValueSet: JustModalitiesVS
@@ -43,7 +43,7 @@ Usage: #definition
 * code = #designationType
 * base = #ImagingStudy
 * url = "http://johnmoehrke.github.io/testDicom/SearchParameter/SsopOid"
-* expression = "(extension('http://johnmoehrke.github.io/testDicom/StructureDefinition/testDicom.SopOid').value as oid)"
+* expression = "(extension('http://johnmoehrke.github.io/testDicom/StructureDefinition/testDicom.SopOid').value.ofType(oid))"
 * type = #uri
 
 Instance:   ex-imagingstudyTrivial
