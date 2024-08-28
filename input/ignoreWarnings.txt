@@ -9,3 +9,6 @@ The valueSet reference http://dicom.nema.org/medical/dicom/current/output/chtml/
 
 # DICOM recognized URI for their codeSystem. Not available as a codeSystem
 A definition for CodeSystem 'http://dicom.nema.org/resources/ontology/DCMUID' could not be found, so the code cannot be validated
+
+# There is some problem in R4 causing this https://chat.fhir.org/#narrow/stream/179202-terminology/topic/odd.20DICOM.20vocabulary.20warning
+There are multiple different potential matches for the url 'http://dicom.nema.org/resources/ontology/DCM'. It might be a good idea to fix to the correct version to reduce the likelihood of a wrong version being selected by an implementation/implementer.%

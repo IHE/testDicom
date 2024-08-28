@@ -1,6 +1,6 @@
 # testDicom
 
-This creates and example AuditEvent with two valueSets. One assembles some DICOM codes. The other calls for pulling in a DICOM valueset.
+This creates and example ImagingStudy with two valueSets. One assembles some DICOM codes. The other calls for pulling in a DICOM valueset.
 
 Note this IG is depending on the fhir.dicom IG so as to have access to DICOM defined vocabulary published within. See [http://fhir.org/packages/fhir.dicom/](http://fhir.org/packages/fhir.dicom/)
 
@@ -34,6 +34,11 @@ Note that `http://dicom.nema.org/resources/ontology/DCMUID` should be used in FH
   * build complains that the valid code is not in the given valueset... 
     * note that the valueSet does expand now
   * The Coding provided (http://dicom.nema.org/resources/ontology/DCM#AR) is in the expansion value set http://johnmoehrke.github.io/testDicom/ValueSet/JustModalitiesVS, and a code is required from this value set. (error message = 	The Coding provided (http://dicom.nema.org/resources/ontology/DCM#AR) is not in the value set http://johnmoehrke.github.io/testDicom/ValueSet/JustModalitiesVS, and a code is required from this value set....)
+
+## FHIR core use of DICOM codes
+
+added AuditEvent, Provenance, and Consent -- as they all use the ValueSet that has DICOM codes in them. These work without issues if you include a dependency on fhir.dicom; but in R5 give warnings if you do not. Given this IG needs fhir.dicom, they are here to show everything without warnings.
+
 
 ### IG builder analysis
 

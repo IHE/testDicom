@@ -1,4 +1,4 @@
-Alias: DCM = http://dicom.nema.org/resources/ontology/DCM|01
+Alias: DCM = http://dicom.nema.org/resources/ontology/DCM
 Alias: DCMUID = http://dicom.nema.org/resources/ontology/DCMUID
 
 ValueSet: JustModalitiesVS
@@ -158,3 +158,87 @@ Usage: #example
 * address.state = "WI"
 * address.country = "USA"
 
+
+Instance:   ex-device
+InstanceOf: Device
+Title:      "Dummy Device example"
+Description: "Dummy Device example for completeness sake. No actual use of this resource other than an example target"
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+
+Instance: ex-auditBasicCreateImagingStudy
+InstanceOf: AuditEvent
+Title: "Server - Audit Example of a basic Create of an ImagingStudy"
+Description: """
+Audit Example for a RESTful Create of an ImagingStudy resource with a patient subject. 
+
+- recorded by the server
+- server is FHIR application server defined by ex-device
+- client is an app on myMachine on myMachine
+- user is John Smith
+- created resource is ex-measurereport
+- patient is ex-patient
+"""
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* code = http://terminology.hl7.org/CodeSystem/audit-event-type#rest "Restful Operation"
+* action = #C
+* category[+] = http://hl7.org/fhir/restful-interaction#create "create"
+//* severity = #Informational
+* recorded = 2020-04-29T09:49:00.000Z
+//* outcome = http://terminology.hl7.org/CodeSystem/audit-event-outcome#0 "Success"
+* outcome.code = http://hl7.org/fhir/issue-severity#success
+* source.site.display = "server.example.com"
+* source.observer = Reference(Device/ex-device)
+* source.type = http://terminology.hl7.org/CodeSystem/security-source-type#4 "Application Server"
+* agent[+].type = DCM#110152 "Destination Role ID"
+* agent[=].requestor = false
+* agent[=].who = Reference(Device/ex-device)
+* agent[+].type = DCM#110153 "Source Role ID"
+* agent[=].requestor = false
+* agent[=].who.display = "myMachine.example.org"
+* agent[+].type = http://terminology.hl7.org/CodeSystem/extra-security-role-type#humanuser
+* agent[=].role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#AUT "author (originator)"
+* agent[=].who.display = "John Smith" // just a display name pulled from the OAuth token
+* agent[=].requestor = true
+* entity[+].what = Reference(ex-imagingstudyBind)
+//* entity[=].type = http://terminology.hl7.org/CodeSystem/audit-entity-type#2 "System Object"
+* entity[=].role = http://terminology.hl7.org/CodeSystem/object-role#4 "Domain Resource"
+* entity[+].what = Reference(Patient/ex-patient)
+//* entity[=].type = http://terminology.hl7.org/CodeSystem/audit-entity-type#1 "Person"
+* entity[=].role = http://terminology.hl7.org/CodeSystem/object-role#1 "Patient"
+
+Instance: ex-provenanceCreateImagingStudy
+InstanceOf: Provenance
+Title: "Server - Provenance Example of a basic Create of an ImagingStudy"
+Description: """
+Provenance Example for a RESTful Create of an ImagingStudy resource with a patient subject. 
+
+- recorded by the server
+- server is FHIR application server defined by ex-device
+- client is an app on myMachine on myMachine
+- user is John Smith
+- created resource is ex-measurereport
+- patient is ex-patient
+"""
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* target = Reference(ex-imagingstudyBind)
+* occurredDateTime = 2020-04-29T09:49:00.000Z
+* recorded = 2020-04-29T09:49:00.000Z
+* patient = Reference(Patient/ex-patient)
+
+* agent[+].type = DCM#110152 "Destination Role ID"
+* agent[=].who = Reference(Device/ex-device)
+* agent[+].type = DCM#110153 "Source Role ID"
+* agent[=].who.display = "myMachine.example.org"
+* agent[+].type = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#AUT "author (originator)"
+* agent[=].role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#AUT "author (originator)"
+* agent[=].who.display = "John Smith" // just a display name pulled from the OAuth token
+
+Instance: ex-consent
+InstanceOf: Consent
+Title: "Example Consent"
+Description: "Testing provenance role"
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* category = http://loinc.org#57017-6
+* subject = Reference(Patient/ex-patient)
+* provision[+].actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#AUT "author (originator)"
